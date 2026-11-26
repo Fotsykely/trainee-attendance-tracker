@@ -91,6 +91,9 @@ async function SummaryTable({ from, to }: { from: string; to: string }) {
               <th scope="col" className="px-4 py-3 text-right font-semibold">
                 Taux de présence
               </th>
+              <th scope="col" className="px-4 py-3 text-right font-semibold">
+                Taux de retard
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -103,8 +106,10 @@ async function SummaryTable({ from, to }: { from: string; to: string }) {
                 <td className="px-4 py-3 text-right">{line.lateDays}</td>
                 <td className="px-4 py-3 text-right">{line.absentDays}</td>
                 <td className="px-4 py-3 text-right font-semibold">
-                  {formatRate(line.attendanceRate)}
-                  {line.attendanceRate === null && <span className="sr-only"> (aucun pointage sur la période)</span>}
+                  <Rate value = {line.attendanceRate} />
+                </td>
+                <td className="px-4 py-3 text-right font-semibold">
+                  <Rate value = {line.lateRate} />
                 </td>
               </tr>
             ))}
@@ -118,4 +123,14 @@ async function SummaryTable({ from, to }: { from: string; to: string }) {
       </p>
     </section>
   );
+}
+
+function Rate({value}: {value: number | null})
+{
+    return (
+        <>
+            {formatRate(value)}
+            {value === null && <span className="sr-only"> (aucun pointage sur la période)</span>}
+        </>
+    );
 }

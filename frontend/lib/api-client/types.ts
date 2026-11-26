@@ -33,6 +33,7 @@ export interface TraineeSummary {
   recordedDays: number;
   // Percentage with one decimal (late days count as attended); null when no day is recorded.
   attendanceRate: number | null;
+  lateRate: number| null;
 }
 
 // Validation messages per form field, with camelCase field names: { date: ["La date n'est pas valide."] }
