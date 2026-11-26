@@ -1,0 +1,24 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: attendance-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      # 3308 on the host so it does not clash with a local MySQL on 3306 (or another project on 3307)
+      - "${MYSQL_PORT:-3308}:3306"
+    volumes:
+      - attendance-mysql-data:/var/lib/mysql
+    healthcheck:
+      # $$ is a literal $ for compose: the variables are read inside the container.
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u$${MYSQL_USER} -p$${MYSQL_PASSWORD} --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  attendance-mysql-data:
