@@ -9,8 +9,8 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      # 3308 on the host so it does not clash with a local MySQL on 3306 (or another project on 3307)
-      - "${MYSQL_PORT:-3308}:3306"
+      # 3307 on the host so it does not clash with a local MySQL on 3306 (or another project on 3307)
+      - "${MYSQL_PORT:-3307}:3306"
     volumes:
       - attendance-mysql-data:/var/lib/mysql
     healthcheck:
