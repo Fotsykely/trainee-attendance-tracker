@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Components use these names (bg-primary, text-muted-foreground, ...) and never raw hex
+ * values, so rebranding the app means editing this block only.
+ * "static" emits every variable even when no utility class references it yet.
+ */
+@theme static {
+  --color-primary: #5b4fd6;
+  --color-primary-hover: #4a3fc0;
+  --color-primary-subtle: #eeedfc;
+  --color-on-primary: #ffffff;
+
+  --color-background: #f8f9fb;
+  --color-surface: #ffffff;
+  --color-foreground: #1e293b;
+  --color-muted-foreground: #475569;
+
+  --color-border: #e2e8f0;
+  --color-border-input: #64748b;
+  --color-destructive: #dc2626;
+  --color-ring: #5b4fd6;
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-lg: 10px;
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Visible keyboard focus everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+
+  button,
+  a,
+  select,
+  summary {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
