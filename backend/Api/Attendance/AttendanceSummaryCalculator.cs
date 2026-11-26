@@ -23,7 +23,7 @@ public static class AttendanceSummaryCalculator
                 var absent = own.Count(r => r.Status == AttendanceStatus.Absent);
 
                 return new TraineeSummaryDto(
-                    trainee.Id, trainee.Name, present, late, absent, own.Count, Rate(present + late, own.Count));
+                    trainee.Id, trainee.Name, present, late, absent, own.Count, Rate(present + late, own.Count), Rate(late, own.Count));
             })
             .ToList();
     }

@@ -35,6 +35,7 @@ public record TraineeSummaryDto(
     int LateDays,
     int AbsentDays,
     int RecordedDays,
-    decimal? AttendanceRate);
+    decimal? AttendanceRate,
+    decimal? LateRate);
 
 public record TraineeDto(int Id, string Name);
